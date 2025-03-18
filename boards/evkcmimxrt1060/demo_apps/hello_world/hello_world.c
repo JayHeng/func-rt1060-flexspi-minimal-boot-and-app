@@ -14,6 +14,43 @@
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
+#if defined(FUNC_BOOT)
+#define APP_START 0x60400000U
+ 
+uint32_t s_appStack = 0;
+uint32_t s_appEntry = 0;
+ 
+typedef void (*call_function_t)(void);
+call_function_t s_callFunction = 0;
+ 
+void jump_to_app(void)
+{
+    s_appStack = *(uint32_t *)(APP_START);
+    s_appEntry = *(uint32_t *)(APP_START + 4);
+ 
+    // Turn off interrupts.
+    __disable_irq();
+ 
+    // Set the VTOR to default.
+    SCB->VTOR = APP_START;
+ 
+    // Memory barriers for good measure.
+    __ISB();
+    __DSB();
+ 
+    // Set main stack pointer and process stack pointer.
+    __set_MSP(s_appStack);
+    __set_PSP(s_appStack);
+ 
+    // Jump to app entry point, does not return.
+    s_callFunction = (call_function_t)s_appEntry;
+    s_callFunction();
+ 
+    while (1)
+    {
+    }
+}
+#endif
 
 /*******************************************************************************
  * Prototypes
@@ -36,7 +73,15 @@ int main(void)
     /* Init board hardware. */
     BOARD_InitHardware();
 
-    PRINTF("hello world.\r\n");
+    PRINTF("\r\n----------------------\r\n");
+#if defined(FUNC_BOOT)
+    PRINTF("hello world from boot.\r\n");
+    PRINTF("get app info: PC = 0x%x, SP = 0x%x.\r\n", *(uint32_t *)(APP_START + 4), *(uint32_t *)(APP_START));
+    PRINTF("jump to app.\r\n");
+    jump_to_app();
+#elif defined(FUNC_APP)
+    PRINTF("hello world from app.\r\n");
+#endif
 
     while (1)
     {

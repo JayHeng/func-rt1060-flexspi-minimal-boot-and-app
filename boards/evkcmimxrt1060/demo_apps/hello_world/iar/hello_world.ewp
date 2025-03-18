@@ -240,6 +240,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>DEBUG</state>
+                    <state>FUNC_APP</state>
                     <state>XIP_BOOT_HEADER_ENABLE=0</state>
                     <state>XIP_EXTERNAL_FLASH=1</state>
                     <state>SDK_DEBUGCONSOLE=1</state>
@@ -1366,6 +1367,7 @@
                 <option>
                     <name>CCDefines</name>
                     <state>DEBUG</state>
+                    <state>FUNC_BOOT</state>
                     <state>XIP_BOOT_HEADER_ENABLE=1</state>
                     <state>XIP_EXTERNAL_FLASH=1</state>
                     <state>SDK_DEBUGCONSOLE=1</state>
