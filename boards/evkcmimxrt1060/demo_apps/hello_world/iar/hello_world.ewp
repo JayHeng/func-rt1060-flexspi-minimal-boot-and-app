@@ -1927,7 +1927,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$/MIMXRT1062xxxxx_flexspi_nor.icf</state>
+                    <state>$PROJ_DIR$/MIMXRT1062xxxxx_flexspi_nor_app.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
@@ -3053,7 +3053,7 @@
                 </option>
                 <option>
                     <name>IlinkIcfFile</name>
-                    <state>$PROJ_DIR$/MIMXRT1062xxxxx_flexspi_nor.icf</state>
+                    <state>$PROJ_DIR$/MIMXRT1062xxxxx_flexspi_nor_boot.icf</state>
                 </option>
                 <option>
                     <name>IlinkIcfFileSlave</name>
