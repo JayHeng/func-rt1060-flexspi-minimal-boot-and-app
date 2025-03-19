@@ -1821,7 +1821,7 @@
                 <option>
                     <name>OOCOutputFormat</name>
                     <version>3</version>
-                    <state>3</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>OCOutputOverride</name>
@@ -1829,7 +1829,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state>hello_world.bin</state>
+                    <state>hello_world.srec</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>

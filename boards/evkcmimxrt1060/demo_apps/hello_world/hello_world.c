@@ -50,6 +50,27 @@ void jump_to_app(void)
     {
     }
 }
+
+void print_secure_status(void)
+{
+    uint32_t sec_config = 0;
+    sec_config = (OCOTP->CFG3 >> 1) & 0x1;
+    sec_config |= OCOTP->CFG5 & 0x02;
+    switch(sec_config)
+    {
+        case 0x0:
+            PRINTF("chip in FAB mode.\r\n");
+            break;
+        case 0x1:
+            PRINTF("chip in HAB open mode.\r\n");
+            break;
+        case 0x2:
+        case 0x3:
+        default:
+            PRINTF("chip in HAB closed mode.\r\n");
+            break;
+    }
+}
 #endif
 
 /*******************************************************************************
@@ -63,6 +84,7 @@ void jump_to_app(void)
 /*******************************************************************************
  * Code
  ******************************************************************************/
+
 /*!
  * @brief Main function
  */
@@ -76,6 +98,7 @@ int main(void)
     PRINTF("\r\n----------------------\r\n");
 #if defined(FUNC_BOOT)
     PRINTF("hello world from boot.\r\n");
+    print_secure_status();
     PRINTF("get app info: PC = 0x%x, SP = 0x%x.\r\n", *(uint32_t *)(APP_START + 4), *(uint32_t *)(APP_START));
     PRINTF("jump to app.\r\n");
     jump_to_app();
